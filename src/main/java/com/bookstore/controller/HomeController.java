@@ -1,10 +1,5 @@
 package com.bookstore.controller;
 
-<<<<<<< HEAD
-import java.util.Locale;
-
-import org.springframework.beans.factory.annotation.Autowired;
-=======
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
@@ -15,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
->>>>>>> d776f0c
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,23 +18,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-<<<<<<< HEAD
-=======
 import org.springframework.web.bind.annotation.RequestMethod;
->>>>>>> d776f0c
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bookstore.domain.User;
 import com.bookstore.domain.security.PasswordResetToken;
-<<<<<<< HEAD
-import com.bookstore.service.UserService;
-import com.bookstore.service.impl.UserSecurityService;
-
-@Controller
-public class HomeController{
-	
-	@Autowired
-=======
 import com.bookstore.domain.security.Role;
 import com.bookstore.domain.security.UserRole;
 import com.bookstore.service.UserService;
@@ -58,26 +40,16 @@ public class HomeController {
 	private MailConstructor mailConstructor;
 
 	@Autowired
->>>>>>> d776f0c
 	private UserService userService;
 	
 	@Autowired
 	private UserSecurityService userSecurityService;
-<<<<<<< HEAD
-	
-=======
 
->>>>>>> d776f0c
 	@RequestMapping("/")
 	public String index() {
 		return "index";
 	}
-<<<<<<< HEAD
-	
-	
-=======
 
->>>>>>> d776f0c
 	@RequestMapping("/login")
 	public String login(Model model) {
 		model.addAttribute("classActiveLogin", true);
@@ -85,38 +57,6 @@ public class HomeController {
 	}
 
 	@RequestMapping("/forgetPassword")
-<<<<<<< HEAD
-	public String forgetPassword(
-			
-			Model model) {
-		
-		model.addAttribute("classActiveLogin", true);
-		return "myAccount";
-	}
-	
-	@RequestMapping("/newUser")
-	public String newUser(Model model,
-			Locale locale,
-			@RequestParam("token") String token) {
-		PasswordResetToken passToken = userService.getPasswordResetToken(token);
-		
-		if (passToken == null) {
-			String message = "Invalid Token.";
-			model.addAttribute("message", message);
-			return "redirect:/badrequest";
-		}
-		
-	    User user = passToken.getUser();
-		String userName = user.getUsername();
-		
-		UserDetails userDetails = userSecurityService.loadUserByUsername(userName);
-		
-		Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, userDetails.getPassword(), userDetails.getAuthorities());
-		
-		SecurityContextHolder.getContext().setAuthentication(authentication);
-		
-		model.addAttribute("classActiveNewUser", true);
-=======
 	public String forgetPassword(Model model) {
 
 		model.addAttribute("classActiveForgetPassword", true);
@@ -173,7 +113,6 @@ public class HomeController {
 		
 		model.addAttribute("emailSent", "true");
 		
->>>>>>> d776f0c
 		return "myAccount";
 	}
 	
