@@ -35,6 +35,10 @@ public class UserRole {
 
 	}
 	
+	public UserRole() {
+		
+	}
+	
 	
 
 	public Long getUserRoleId() {

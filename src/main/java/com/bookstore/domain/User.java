@@ -23,7 +23,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class User implements UserDetails{
 	
-	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="id", nullable = false, updatable = false)
@@ -33,12 +32,12 @@ public class User implements UserDetails{
 	private String firstName;
 	private String lastName;
 	
-	@Column(name="email", nullable=false, updatable= false)
+	@Column(name="email", nullable = false, updatable = false)
 	private String email;
 	private String phone;
-	private boolean enabled = true;
+	private boolean enabled=true;
 	
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch= FetchType.EAGER)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JsonIgnore
 	private Set<UserRole> userRoles = new HashSet<>();
 	
@@ -84,19 +83,22 @@ public class User implements UserDetails{
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public boolean isEnabled() {
-		return enabled;
-	}
+	
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
+	public Set<UserRole> getUserRoles() {
+		return userRoles;
+	}
+	public void setUserRoles(Set<UserRole> userRoles) {
+		this.userRoles = userRoles;
+	}
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		Set<GrantedAuthority> authorities = new HashSet<>();
+		Set<GrantedAuthority> authorites = new HashSet<>();
+		userRoles.forEach(ur -> authorites.add(new Authority(ur.getRole().getName())));
 		
-		userRoles.forEach(ur -> authorities.add(new Authority(ur.getRole().getName())));
-		
-		return authorities;
+		return authorites;
 	}
 	@Override
 	public boolean isAccountNonExpired() {
@@ -114,6 +116,10 @@ public class User implements UserDetails{
 		return true;
 	}
 	
+	@Override
+	public boolean isEnabled() {
+		return enabled;
+	}
 	
-    
+	
 }

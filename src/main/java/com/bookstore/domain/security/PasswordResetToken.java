@@ -13,9 +13,15 @@ import javax.persistence.OneToOne;
 
 import com.bookstore.domain.User;
 
+<<<<<<< HEAD
 
 @Entity
 public class PasswordResetToken {
+=======
+@Entity
+public class PasswordResetToken {
+
+>>>>>>> d776f0c
 	private static final int EXPIRATION = 60 * 24;
 	
 	@Id
@@ -30,6 +36,7 @@ public class PasswordResetToken {
 	
 	private Date expiryDate;
 	
+<<<<<<< HEAD
 	public PasswordResetToken(final String token, final User user) 
 	{
 		super ();
@@ -37,6 +44,14 @@ public class PasswordResetToken {
 		this.user = user;
 		this.expiryDate = calculateExpiryDate(EXPIRATION);
 		
+=======
+	public PasswordResetToken(final String token, final User user) {
+		super ();
+		
+		this.token = token;
+		this.user = user;
+		this.expiryDate = calculateExpiryDate(EXPIRATION);
+>>>>>>> d776f0c
 	}
 	
 	private Date calculateExpiryDate (final int expiryTimeInMinutes) {
@@ -94,5 +109,8 @@ public class PasswordResetToken {
 	}
 	
 	
+<<<<<<< HEAD
 	
+=======
+>>>>>>> d776f0c
 }
