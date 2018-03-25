@@ -6,10 +6,14 @@ import org.springframework.stereotype.Service;
 import com.bookstore.domain.User;
 import com.bookstore.domain.security.PasswordResetToken;
 import com.bookstore.repository.PasswordResetTokenRepository;
+import com.bookstore.repository.UserRepository;
 import com.bookstore.service.UserService;
 
 @Service
 public class UserServiceImpl implements UserService{
+	
+	@Autowired
+	private UserRepository userRepository;
 	
 	@Autowired
 	private PasswordResetTokenRepository passwordResetTokenRepository;
@@ -25,6 +29,13 @@ public class UserServiceImpl implements UserService{
 		passwordResetTokenRepository.save(myToken);
 	}
 	
+	@Override
+	public User findByUsername(String username) {
+		return userRepository.findByUsername(username);
+	}
 	
+	public User findByEmail (String email) {
+		return userRepository.findByEmail(email);
+	}
 
 }
